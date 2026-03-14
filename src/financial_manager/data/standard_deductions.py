@@ -1,0 +1,44 @@
+"""Standard deduction amounts by year and filing status.
+
+Source: IRS Revenue Procedures for tax years 2024 and 2025.
+"""
+
+from __future__ import annotations
+
+from financial_manager.models.filing_status import FilingStatus
+
+# Keyed by (tax_year, filing_status) → standard deduction amount
+STANDARD_DEDUCTIONS: dict[tuple[int, FilingStatus], float] = {
+    # ── 2024 ─────────────────────────────────────────────────────────
+    (2024, FilingStatus.SINGLE): 14_600,
+    (2024, FilingStatus.MARRIED_FILING_JOINTLY): 29_200,
+    (2024, FilingStatus.MARRIED_FILING_SEPARATELY): 14_600,
+    (2024, FilingStatus.HEAD_OF_HOUSEHOLD): 21_900,
+    (2024, FilingStatus.QUALIFYING_SURVIVING_SPOUSE): 29_200,
+    # ── 2025 ─────────────────────────────────────────────────────────
+    (2025, FilingStatus.SINGLE): 15_000,
+    (2025, FilingStatus.MARRIED_FILING_JOINTLY): 30_000,
+    (2025, FilingStatus.MARRIED_FILING_SEPARATELY): 15_000,
+    (2025, FilingStatus.HEAD_OF_HOUSEHOLD): 22_500,
+    (2025, FilingStatus.QUALIFYING_SURVIVING_SPOUSE): 30_000,
+}
+
+
+def get_standard_deduction(tax_year: int, filing_status: FilingStatus) -> float:
+    """Return the standard deduction for the given year and filing status.
+
+    Args:
+        tax_year: 2024 or 2025.
+        filing_status: IRS filing status.
+
+    Returns:
+        Standard deduction amount in dollars.
+
+    Raises:
+        ValueError: If year/status combination is not supported.
+    """
+    key = (tax_year, filing_status)
+    if key not in STANDARD_DEDUCTIONS:
+        msg = f"No standard deduction data for year={tax_year}, status={filing_status.value}"
+        raise ValueError(msg)
+    return STANDARD_DEDUCTIONS[key]

@@ -1,0 +1,37 @@
+# Pre-commit hooks for Financial Manager
+# Install: pip install pre-commit && pre-commit install
+# Run manually: pre-commit run --all-files
+
+repos:
+  # ── Standard hooks ──────────────────────────────────────────────
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-added-large-files
+        args: ['--maxkb=500']
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-json
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: detect-private-key
+      - id: no-commit-to-branch
+        args: ['--branch', 'main']
+
+  # ── Python linting ───────────────────────────────────────────────
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.0
+    hooks:
+      - id: ruff
+        args: ['--fix']
+      - id: ruff-format
+
+  # ── Change log validation ──────────────────────────────────────────
+  - repo: local
+    hooks:
+      - id: validate-change-log
+        name: Validate change-log.json schema & traceability
+        entry: python3 scripts/validate_change_log.py
+        language: system
+        always_run: true
+        pass_filenames: false

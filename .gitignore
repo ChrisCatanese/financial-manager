@@ -1,0 +1,70 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Output / generated artifacts
+outputs/
+output/
+htmlcov/
+*.coverage
+.coverage
+
+# Binary and Office docs
+*.pkl
+*.pickle
+*.parquet
+*.db
+*.sqlite
+*.sqlite3
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.code-workspace
+
+# Misc
+*.log
+*.tmp
+*.bak
+*.orig
+
+# Credentials and secrets (NEVER commit)
+.env
+.env.local
+.env.production
+credentials.json
+*.secret
+*.pem
+*.key
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+
+# Agent Scratchpads
+sandbox/*
+!sandbox/.gitkeep
+scratch/*
+!scratch/.gitkeep

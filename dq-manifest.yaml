@@ -1,0 +1,24 @@
+# dq-manifest.yaml
+# ─────────────────────────────────────────────────────────────────────
+# Self-referential assurance contract for the Financial Manager project.
+# ─────────────────────────────────────────────────────────────────────
+
+core_paths:
+  - src
+  - scripts
+
+test_paths:
+  - tests
+
+exploratory_paths:
+  - notebooks
+  - scratch
+  - sandbox
+
+pipeline_entry: "scripts/pipeline.py::run"
+
+traceability_matrix: "docs/requirements/traceability-matrix.md"
+change_log: "docs/change-log.json"
+
+# strict = block commit | warn = allow with warnings | off = skip
+enforcement: strict
