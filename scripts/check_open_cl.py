@@ -49,7 +49,7 @@ def get_target_path(stdin_data: dict) -> str | None:
 
     cwd = stdin_data.get("cwd", "") or os.getcwd()
     if cwd and file_path.startswith(cwd):
-        rel = file_path[len(cwd):].lstrip("/")
+        rel = file_path[len(cwd) :].lstrip("/")
         return rel
     return file_path
 
@@ -73,11 +73,7 @@ def auto_scope_expansions(scope_entries: list[str], policy: dict) -> list[str]:
     extra: list[str] = []
     if policy.get("auto_include_tests"):
         code_prefixes = ("src/", "scripts/", "frontend/")
-        has_code = any(
-            e.startswith(p) or e == p
-            for e in scope_entries
-            for p in code_prefixes
-        )
+        has_code = any(e.startswith(p) or e == p for e in scope_entries for p in code_prefixes)
         if has_code:
             extra.append("tests/")
     if policy.get("auto_include_docs"):

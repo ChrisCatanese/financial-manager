@@ -1,6 +1,6 @@
 """US federal income tax brackets by year and filing status.
 
-Source: IRS Revenue Procedures for tax years 2024 and 2025.
+Source: IRS Revenue Procedures for tax years 2023-2025.
 Each bracket is a tuple of (rate, upper_bound) where upper_bound is the
 maximum taxable income taxed at that rate. The last bracket uses float('inf').
 """
@@ -17,7 +17,7 @@ def get_brackets(tax_year: int, filing_status: FilingStatus) -> BracketSchedule:
     """Return the progressive tax bracket schedule for the given year and status.
 
     Args:
-        tax_year: 2024 or 2025.
+        tax_year: 2023, 2024, or 2025.
         filing_status: IRS filing status enum.
 
     Returns:
@@ -33,10 +33,61 @@ def get_brackets(tax_year: int, filing_status: FilingStatus) -> BracketSchedule:
     return TAX_BRACKETS[key]
 
 
-# ── 2024 Brackets ───────────────────────────────────────────────────
-# Source: IRS Rev. Proc. 2023-34
+# ── 2023 Brackets ───────────────────────────────────────────────────
+# Source: IRS Rev. Proc. 2022-38
 
 TAX_BRACKETS: dict[tuple[int, FilingStatus], BracketSchedule] = {
+    # ── 2023 Single ──────────────────────────────────────────────────
+    (2023, FilingStatus.SINGLE): [
+        (0.10, 11_000),
+        (0.12, 44_725),
+        (0.22, 95_375),
+        (0.24, 182_100),
+        (0.32, 231_250),
+        (0.35, 578_125),
+        (0.37, float("inf")),
+    ],
+    # ── 2023 Married Filing Jointly / QSS ────────────────────────────
+    (2023, FilingStatus.MARRIED_FILING_JOINTLY): [
+        (0.10, 22_000),
+        (0.12, 89_450),
+        (0.22, 190_750),
+        (0.24, 364_200),
+        (0.32, 462_500),
+        (0.35, 693_750),
+        (0.37, float("inf")),
+    ],
+    (2023, FilingStatus.QUALIFYING_SURVIVING_SPOUSE): [
+        (0.10, 22_000),
+        (0.12, 89_450),
+        (0.22, 190_750),
+        (0.24, 364_200),
+        (0.32, 462_500),
+        (0.35, 693_750),
+        (0.37, float("inf")),
+    ],
+    # ── 2023 Married Filing Separately ───────────────────────────────
+    (2023, FilingStatus.MARRIED_FILING_SEPARATELY): [
+        (0.10, 11_000),
+        (0.12, 44_725),
+        (0.22, 95_375),
+        (0.24, 182_100),
+        (0.32, 231_250),
+        (0.35, 346_875),
+        (0.37, float("inf")),
+    ],
+    # ── 2023 Head of Household ───────────────────────────────────────
+    (2023, FilingStatus.HEAD_OF_HOUSEHOLD): [
+        (0.10, 15_700),
+        (0.12, 59_850),
+        (0.22, 95_350),
+        (0.24, 182_100),
+        (0.32, 231_250),
+        (0.35, 578_100),
+        (0.37, float("inf")),
+    ],
+    # ── 2024 Brackets ───────────────────────────────────────────────────
+    # Source: IRS Rev. Proc. 2023-34
     # ── 2024 Single ──────────────────────────────────────────────────
     (2024, FilingStatus.SINGLE): [
         (0.10, 11_600),

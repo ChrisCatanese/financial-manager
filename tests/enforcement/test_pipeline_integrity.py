@@ -111,8 +111,7 @@ class TestShellFailFast:
         has_set_e = re.search(r"^set\s+-e", content, re.MULTILINE)
         has_set_euo = re.search(r"^set\s+-[euo]", content, re.MULTILINE)
         assert has_set_e or has_set_euo, (
-            f"PIPE-02: {script.name} does not contain 'set -e' — "
-            f"pipeline scripts must fail on first error"
+            f"PIPE-02: {script.name} does not contain 'set -e' — " f"pipeline scripts must fail on first error"
         )
 
     @pytest.mark.parametrize(
@@ -124,8 +123,7 @@ class TestShellFailFast:
         """Shell scripts must have a shebang line."""
         content = script.read_text(encoding="utf-8")
         assert content.startswith("#!"), (
-            f"PIPE-02: {script.name} must start with a shebang line "
-            f"(#!/bin/bash or #!/usr/bin/env bash)"
+            f"PIPE-02: {script.name} must start with a shebang line " f"(#!/bin/bash or #!/usr/bin/env bash)"
         )
 
 
@@ -143,9 +141,7 @@ class TestPythonMainGuard:
     def test_has_main_guard(self, script: Path) -> None:
         """Pipeline scripts must be importable without side effects."""
         content = script.read_text(encoding="utf-8")
-        has_main = (
-            "__name__" in content and "__main__" in content
-        ) or re.search(r"def\s+main\s*\(", content)
+        has_main = ("__name__" in content and "__main__" in content) or re.search(r"def\s+main\s*\(", content)
         assert has_main, (
             f"PIPE-03: {script.name} has no __main__ guard or main() function — "
             f"pipeline scripts must be importable without triggering execution"
@@ -163,10 +159,7 @@ class TestManifestPipeline:
         assert MANIFEST.exists(), "PIPE-04: dq-manifest.yaml missing"
         data = yaml.safe_load(MANIFEST.read_text(encoding="utf-8"))
         core = data.get("core_paths", [])
-        assert core, (
-            "PIPE-04: dq-manifest.yaml has empty core_paths — "
-            "must declare paths containing pipeline code"
-        )
+        assert core, "PIPE-04: dq-manifest.yaml has empty core_paths — " "must declare paths containing pipeline code"
 
 
 # ── PIPE-05: scripts/ has at least one executable ─────────────────────
@@ -180,9 +173,7 @@ class TestScriptsDirectory:
         if not SCRIPTS_DIR.exists():
             pytest.skip("No scripts/ directory")
         py_files = list(SCRIPTS_DIR.glob("*.py"))
-        assert py_files, (
-            "PIPE-05: scripts/ directory exists but contains no .py files"
-        )
+        assert py_files, "PIPE-05: scripts/ directory exists but contains no .py files"
 
 
 # ── PIPE-06: Output directory declared ────────────────────────────────
@@ -195,10 +186,7 @@ class TestOutputDirectory:
 
     def test_output_dir_exists_or_gitkeep(self) -> None:
         """An output directory must exist (possibly with .gitkeep)."""
-        found = any(
-            (ROOT / d).exists() or (ROOT / d / ".gitkeep").exists()
-            for d in self.CANDIDATE_DIRS
-        )
+        found = any((ROOT / d).exists() or (ROOT / d / ".gitkeep").exists() for d in self.CANDIDATE_DIRS)
         if not found:
             # Check if manifest declares an output path
             if MANIFEST.exists():

@@ -49,11 +49,11 @@ _MODULE_ROW_RE = re.compile(r"^\|\s*`([^`]+\.py)`\s*\|")
 
 # Forward traceability: | TR-NNN | FR-NNN | BR-NNN | Code | Tests | Status |
 _FORWARD_ROW_RE = re.compile(
-    r"^\|\s*(TR-\d{3})\s*\|"   # col 1: TR
-    r"\s*([^|]+?)\s*\|"        # col 2: FR
-    r"\s*([^|]+?)\s*\|"        # col 3: BR
-    r"\s*([^|]+?)\s*\|"        # col 4: Code
-    r"\s*([^|]+?)\s*\|"        # col 5: Tests
+    r"^\|\s*(TR-\d{3})\s*\|"  # col 1: TR
+    r"\s*([^|]+?)\s*\|"  # col 2: FR
+    r"\s*([^|]+?)\s*\|"  # col 3: BR
+    r"\s*([^|]+?)\s*\|"  # col 4: Code
+    r"\s*([^|]+?)\s*\|"  # col 5: Tests
 )
 
 
@@ -92,9 +92,7 @@ class TestRequirementDocumentsExist:
         if not path.exists():
             pytest.skip(f"{name} not yet created")
         size = path.stat().st_size
-        assert size > 100, (
-            f"TRACE-01: {name} exists but is only {size} bytes — likely a stub"
-        )
+        assert size > 100, f"TRACE-01: {name} exists but is only {size} bytes — likely a stub"
 
     def test_traceability_matrix_exists(self) -> None:
         """Traceability matrix must exist if project has requirements."""
@@ -102,13 +100,10 @@ class TestRequirementDocumentsExist:
             pytest.skip("No business requirements — matrix not required")
         if not MATRIX_PATH.exists():
             pytest.skip(
-                "TRACE-01: traceability-matrix.md not found — "
-                "create at docs/requirements/traceability-matrix.md"
+                "TRACE-01: traceability-matrix.md not found — " "create at docs/requirements/traceability-matrix.md"
             )
         size = MATRIX_PATH.stat().st_size
-        assert size > 200, (
-            f"TRACE-01: traceability-matrix.md is only {size} bytes — likely a stub"
-        )
+        assert size > 200, f"TRACE-01: traceability-matrix.md is only {size} bytes — likely a stub"
 
 
 # ── TRACE-02: Business requirements have structured IDs ──────────────
@@ -187,9 +182,7 @@ class TestForwardMatrixIntegrity:
                     empty_frs.append(tr_id)
         if not empty_frs:
             return
-        assert not empty_frs, (
-            f"TRACE-05: TRs with no FRs in forward traceability: {empty_frs}"
-        )
+        assert not empty_frs, f"TRACE-05: TRs with no FRs in forward traceability: {empty_frs}"
 
     def test_every_tr_has_br(self) -> None:
         """Forward table: every TR row must list at least one BR."""
@@ -206,9 +199,7 @@ class TestForwardMatrixIntegrity:
                     empty_brs.append(tr_id)
         if not empty_brs:
             return
-        assert not empty_brs, (
-            f"TRACE-05: TRs with no BRs in forward traceability: {empty_brs}"
-        )
+        assert not empty_brs, f"TRACE-05: TRs with no BRs in forward traceability: {empty_brs}"
 
     def test_every_tr_has_code_ref(self) -> None:
         """Forward table: every TR row must reference a code file."""
@@ -225,9 +216,7 @@ class TestForwardMatrixIntegrity:
                     empty_code.append(tr_id)
         if not empty_code:
             return
-        assert not empty_code, (
-            f"TRACE-05: TRs with no code reference in forward traceability: {empty_code}"
-        )
+        assert not empty_code, f"TRACE-05: TRs with no code reference in forward traceability: {empty_code}"
 
 
 # ── TRACE-06: Referenced code files exist ─────────────────────────────
@@ -255,9 +244,8 @@ class TestCodeReferencesExist:
                 full_path = ROOT / rel_path
                 if not full_path.exists():
                     missing.append(rel_path)
-        assert not missing, (
-            "TRACE-06: Files referenced in traceability matrix but missing from disk:\n"
-            + "\n".join(f"  - {m}" for m in missing)
+        assert not missing, "TRACE-06: Files referenced in traceability matrix but missing from disk:\n" + "\n".join(
+            f"  - {m}" for m in missing
         )
 
 
@@ -272,15 +260,9 @@ class TestMatrixConsistency:
         if not MATRIX_PATH.exists():
             pytest.skip("traceability-matrix.md not found")
         text = MATRIX_PATH.read_text(encoding="utf-8")
-        has_forward = re.search(
-            r"##.*[Ff]orward\s+[Tt]raceability", text, re.MULTILINE
-        )
-        assert has_forward, (
-            "TRACE-07: Traceability matrix must have a 'Forward Traceability' section"
-        )
+        has_forward = re.search(r"##.*[Ff]orward\s+[Tt]raceability", text, re.MULTILINE)
+        assert has_forward, "TRACE-07: Traceability matrix must have a 'Forward Traceability' section"
 
     def test_requirements_dir_exists(self) -> None:
         """docs/requirements/ must exist for cross-referencing."""
-        assert DOCS_REQ.is_dir(), (
-            "TRACE-07: docs/requirements/ directory is required for requirement documents"
-        )
+        assert DOCS_REQ.is_dir(), "TRACE-07: docs/requirements/ directory is required for requirement documents"

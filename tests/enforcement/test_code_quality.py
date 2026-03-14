@@ -43,10 +43,7 @@ class TestNoBareExcepts:
             for i, line in enumerate(f.read_text(encoding="utf-8").splitlines(), 1):
                 if self._PATTERN.match(line):
                     violations.append(f"  {_rel(f)}:{i}: {line.strip()}")
-        assert not violations, (
-            f"Bare 'except:' is forbidden ({len(violations)} found):\n"
-            + "\n".join(violations[:20])
-        )
+        assert not violations, f"Bare 'except:' is forbidden ({len(violations)} found):\n" + "\n".join(violations[:20])
 
 
 class TestNoSysPathHacks:
@@ -81,9 +78,8 @@ class TestNoSubprocessShell:
             for i, line in enumerate(source.splitlines(), 1):
                 if self._PATTERN.search(line) and not line.lstrip().startswith("#"):
                     violations.append(f"  {_rel(f)}:{i}: {line.strip()}")
-        assert not violations, (
-            f"subprocess shell=True is forbidden ({len(violations)} found):\n"
-            + "\n".join(violations[:20])
+        assert not violations, f"subprocess shell=True is forbidden ({len(violations)} found):\n" + "\n".join(
+            violations[:20]
         )
 
 
@@ -99,7 +95,4 @@ class TestNoEvalExec:
             for i, line in enumerate(f.read_text(encoding="utf-8").splitlines(), 1):
                 if self._PATTERN.search(line) and not line.lstrip().startswith("#"):
                     violations.append(f"  {_rel(f)}:{i}: {line.strip()}")
-        assert not violations, (
-            f"eval()/exec() forbidden ({len(violations)} found):\n"
-            + "\n".join(violations[:20])
-        )
+        assert not violations, f"eval()/exec() forbidden ({len(violations)} found):\n" + "\n".join(violations[:20])

@@ -19,7 +19,7 @@ def run() -> None:
     """Execute the full pipeline — start the API server."""
     import uvicorn
 
-    from financial_manager.api.main import app  # noqa: F401
+    from financial_manager.api.main import app
 
     logger.info("Starting Financial Manager API server")
     uvicorn.run(app, host="0.0.0.0", port=8000)

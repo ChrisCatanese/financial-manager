@@ -27,7 +27,7 @@ class TaxInput(BaseModel):
 
     gross_income: float = Field(..., ge=0, description="Total gross income")
     filing_status: FilingStatus = Field(default=FilingStatus.SINGLE, description="IRS filing status")
-    tax_year: int = Field(default=2024, ge=2024, le=2025, description="Tax year")
+    tax_year: int = Field(default=2024, ge=2023, le=2025, description="Tax year")
     above_the_line_deductions: float = Field(default=0.0, ge=0, description="Above-the-line deductions")
     itemized_deductions: float = Field(default=0.0, ge=0, description="Itemized deductions (0 = use standard)")
     qualified_dividends: float = Field(default=0.0, ge=0, description="Qualified dividends (Form 1040 line 3a)")

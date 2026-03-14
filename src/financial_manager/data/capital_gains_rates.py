@@ -1,6 +1,6 @@
 """Long-term capital gains and qualified dividends rate thresholds.
 
-Source: IRS Revenue Procedures for tax years 2024 and 2025.
+Source: IRS Revenue Procedures for tax years 2023-2025.
 Qualified dividends and net long-term capital gains are taxed at
 preferential rates: 0%, 15%, or 20%.
 
@@ -23,7 +23,7 @@ def get_capital_gains_thresholds(
     """Return the capital gains rate thresholds for the given year and status.
 
     Args:
-        tax_year: 2024 or 2025.
+        tax_year: 2023, 2024, or 2025.
         filing_status: IRS filing status enum.
 
     Returns:
@@ -40,13 +40,38 @@ def get_capital_gains_thresholds(
     return CAP_GAINS_THRESHOLDS[key]
 
 
-# ── 2024 Capital Gains Rate Thresholds ──────────────────────────────
-# Source: IRS Rev. Proc. 2023-34
-#
-# The 0% rate applies up to the threshold; 15% applies up to the next
-# threshold; 20% applies above that.
+# ── 2023 Capital Gains Rate Thresholds ──────────────────────────────
+# Source: IRS Rev. Proc. 2022-38
 
 CAP_GAINS_THRESHOLDS: dict[tuple[int, FilingStatus], CapGainsSchedule] = {
+    # ── 2023 ─────────────────────────────────────────────────────────
+    (2023, FilingStatus.SINGLE): [
+        (0.00, 44_625),
+        (0.15, 492_300),
+        (0.20, float("inf")),
+    ],
+    (2023, FilingStatus.MARRIED_FILING_JOINTLY): [
+        (0.00, 89_250),
+        (0.15, 553_850),
+        (0.20, float("inf")),
+    ],
+    (2023, FilingStatus.QUALIFYING_SURVIVING_SPOUSE): [
+        (0.00, 89_250),
+        (0.15, 553_850),
+        (0.20, float("inf")),
+    ],
+    (2023, FilingStatus.MARRIED_FILING_SEPARATELY): [
+        (0.00, 44_625),
+        (0.15, 276_900),
+        (0.20, float("inf")),
+    ],
+    (2023, FilingStatus.HEAD_OF_HOUSEHOLD): [
+        (0.00, 59_750),
+        (0.15, 523_050),
+        (0.20, float("inf")),
+    ],
+    # ── 2024 Capital Gains Rate Thresholds ──────────────────────────────
+    # Source: IRS Rev. Proc. 2023-34
     # ── 2024 ─────────────────────────────────────────────────────────
     (2024, FilingStatus.SINGLE): [
         (0.00, 47_025),

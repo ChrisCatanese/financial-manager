@@ -42,9 +42,7 @@ class TestDirectoryStructure:
 
     def test_enforcement_dir_exists(self):
         """tests/enforcement/ must exist."""
-        assert ENFORCEMENT_DIR.exists() and ENFORCEMENT_DIR.is_dir(), (
-            "TQUAL-01: tests/enforcement/ directory missing"
-        )
+        assert ENFORCEMENT_DIR.exists() and ENFORCEMENT_DIR.is_dir(), "TQUAL-01: tests/enforcement/ directory missing"
 
     def test_tests_has_init(self):
         """tests/__init__.py must exist."""
@@ -87,14 +85,8 @@ class TestFunctionNaming:
                         if isinstance(item, ast.FunctionDef) and not item.name.startswith(
                             ("test_", "_", "setup", "teardown")
                         ):
-                            issues.append(
-                                f"  {fpath.relative_to(ROOT)}:{item.lineno}: "
-                                f"{node.name}.{item.name}"
-                            )
-        assert not issues, (
-            "TQUAL-03: Methods in Test* classes not following naming:\n"
-            + "\n".join(issues)
-        )
+                            issues.append(f"  {fpath.relative_to(ROOT)}:{item.lineno}: " f"{node.name}.{item.name}")
+        assert not issues, "TQUAL-03: Methods in Test* classes not following naming:\n" + "\n".join(issues)
 
 
 class TestConftestFixtures:
@@ -111,9 +103,9 @@ class TestConftestFixtures:
         if not conftest.exists():
             pytest.skip("conftest.py missing")
         content = conftest.read_text(encoding="utf-8")
-        assert "@pytest.fixture" in content or "ROOT" in content, (
-            "TQUAL-04: enforcement conftest.py has no fixtures or constants"
-        )
+        assert (
+            "@pytest.fixture" in content or "ROOT" in content
+        ), "TQUAL-04: enforcement conftest.py has no fixtures or constants"
 
 
 class TestDocstringsPresent:
@@ -130,9 +122,8 @@ class TestDocstringsPresent:
             docstring = ast.get_docstring(tree)
             if not docstring:
                 missing.append(str(fpath.relative_to(ROOT)))
-        assert not missing, (
-            "TQUAL-05: Enforcement test files missing module docstrings:\n"
-            + "\n".join(f"  {m}" for m in missing)
+        assert not missing, "TQUAL-05: Enforcement test files missing module docstrings:\n" + "\n".join(
+            f"  {m}" for m in missing
         )
 
 
@@ -148,6 +139,5 @@ class TestParametrizeUsage:
             content = fpath.read_text(encoding="utf-8")
             count += len(re.findall(r"@pytest\.mark\.parametrize", content))
         assert count >= self.MIN_PARAMETRIZE_USAGES, (
-            f"TQUAL-06: Only {count} @pytest.mark.parametrize usages, "
-            f"need >= {self.MIN_PARAMETRIZE_USAGES}"
+            f"TQUAL-06: Only {count} @pytest.mark.parametrize usages, " f"need >= {self.MIN_PARAMETRIZE_USAGES}"
         )

@@ -93,7 +93,7 @@ def create_profile(profile: TaxProfile) -> TaxProfile:
     Returns:
         The saved profile.
     """
-    global _current_profile, _current_checklist  # noqa: PLW0603
+    global _current_profile, _current_checklist
     _current_profile = profile
     _current_checklist = generate_checklist(profile)
     logger.info("Profile created: %s/%d", profile.filing_status.value, profile.tax_year)

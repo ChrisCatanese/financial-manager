@@ -151,30 +151,18 @@ class TestManifestPathsExist:
         core = data.get("core_paths", [])
         if isinstance(core, list):
             missing = [
-                p for p in core
-                if isinstance(p, str)
-                and p not in self.RUNTIME_PATHS
-                and not (ROOT / p).exists()
+                p for p in core if isinstance(p, str) and p not in self.RUNTIME_PATHS and not (ROOT / p).exists()
             ]
         else:
             missing = []
-        assert not missing, (
-            "CFG-06: Core paths in manifest missing from disk:\n"
-            + "\n".join(f"  {m}" for m in missing)
-        )
+        assert not missing, "CFG-06: Core paths in manifest missing from disk:\n" + "\n".join(f"  {m}" for m in missing)
 
     def test_test_paths_exist(self):
         """Test paths in manifest must exist."""
         data = yaml.safe_load(MANIFEST.read_text(encoding="utf-8"))
         test_paths = data.get("test_paths", [])
         if isinstance(test_paths, list):
-            missing = [
-                p for p in test_paths
-                if isinstance(p, str) and not (ROOT / p).exists()
-            ]
+            missing = [p for p in test_paths if isinstance(p, str) and not (ROOT / p).exists()]
         else:
             missing = []
-        assert not missing, (
-            "CFG-06: Test paths in manifest missing from disk:\n"
-            + "\n".join(f"  {m}" for m in missing)
-        )
+        assert not missing, "CFG-06: Test paths in manifest missing from disk:\n" + "\n".join(f"  {m}" for m in missing)

@@ -66,10 +66,7 @@ class TestPackageInitFiles:
             py_files = list(subdir.glob("*.py"))
             if py_files and not (subdir / "__init__.py").exists():
                 missing.append(str(subdir.relative_to(ROOT)))
-        assert not missing, (
-            "ARCH-01: Package directories missing __init__.py:\n"
-            + "\n".join(f"  {m}" for m in missing)
-        )
+        assert not missing, "ARCH-01: Package directories missing __init__.py:\n" + "\n".join(f"  {m}" for m in missing)
 
 
 class TestNoCircularImports:
@@ -112,10 +109,7 @@ class TestNoCircularImports:
             if module not in visited:
                 dfs(module, [])
 
-        assert not cycles, (
-            "ARCH-02: Circular imports detected:\n"
-            + "\n".join(f"  {' -> '.join(c)}" for c in cycles)
-        )
+        assert not cycles, "ARCH-02: Circular imports detected:\n" + "\n".join(f"  {' -> '.join(c)}" for c in cycles)
 
 
 class TestNoRelativeImportEscapes:
@@ -132,13 +126,9 @@ class TestNoRelativeImportEscapes:
             for node in ast.walk(tree):
                 if isinstance(node, ast.ImportFrom) and node.level and node.level > 2:
                     violations.append(
-                        f"  {fpath.relative_to(ROOT)}:{node.lineno}: "
-                        f"level-{node.level} relative import"
+                        f"  {fpath.relative_to(ROOT)}:{node.lineno}: " f"level-{node.level} relative import"
                     )
-        assert not violations, (
-            "ARCH-03: Deep relative imports detected:\n"
-            + "\n".join(violations)
-        )
+        assert not violations, "ARCH-03: Deep relative imports detected:\n" + "\n".join(violations)
 
 
 class TestScriptsNoTestImports:
@@ -151,7 +141,4 @@ class TestScriptsNoTestImports:
             content = fpath.read_text(encoding="utf-8")
             if re.search(r"from\s+tests\b|import\s+tests\b", content):
                 violations.append(str(fpath.relative_to(ROOT)))
-        assert not violations, (
-            "ARCH-04: Scripts importing from tests/:\n"
-            + "\n".join(f"  {v}" for v in violations)
-        )
+        assert not violations, "ARCH-04: Scripts importing from tests/:\n" + "\n".join(f"  {v}" for v in violations)

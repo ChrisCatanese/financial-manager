@@ -22,8 +22,15 @@ import sys
 from pathlib import Path
 
 REQUIRED_FIELDS = [
-    "id", "type", "severity", "resolved",
-    "component", "summary", "details", "files", "created",
+    "id",
+    "type",
+    "severity",
+    "resolved",
+    "component",
+    "summary",
+    "details",
+    "files",
+    "created",
 ]
 DEFAULT_TYPES = {"bug", "enhancement"}
 DEFAULT_SEVERITIES = {"critical", "major", "minor", "cosmetic"}
@@ -60,15 +67,9 @@ def validate(path: Path) -> list[str]:
                 errors.append(f"{item_id}: missing required field '{field}'")
 
         if item.get("type") not in valid_types:
-            errors.append(
-                f"{item_id}: invalid type '{item.get('type')}' "
-                f"(expected {valid_types})"
-            )
+            errors.append(f"{item_id}: invalid type '{item.get('type')}' " f"(expected {valid_types})")
         if item.get("severity") not in valid_severities:
-            errors.append(
-                f"{item_id}: invalid severity '{item.get('severity')}' "
-                f"(expected {valid_severities})"
-            )
+            errors.append(f"{item_id}: invalid severity '{item.get('severity')}' " f"(expected {valid_severities})")
 
         scope = item.get("scope")
         if scope is not None:
@@ -77,35 +78,24 @@ def validate(path: Path) -> list[str]:
             elif any(not isinstance(s, str) or not s.strip() for s in scope):
                 errors.append(f"{item_id}: 'scope' entries must be non-empty strings")
         elif require_scope and item.get("resolved") is False:
-            errors.append(
-                f"{item_id}: open entry missing 'scope' "
-                f"(gate_policy.require_scope=true)"
-            )
+            errors.append(f"{item_id}: open entry missing 'scope' " f"(gate_policy.require_scope=true)")
 
         if "files" in item and not isinstance(item["files"], list):
             errors.append(f"{item_id}: 'files' must be an array")
 
         if item.get("resolved") is True:
             if "requirement_change" not in item:
-                errors.append(
-                    f"{item_id}: resolved=true but missing 'requirement_change'"
-                )
+                errors.append(f"{item_id}: resolved=true but missing 'requirement_change'")
             if "fixed" not in item:
-                errors.append(
-                    f"{item_id}: resolved=true but missing 'fixed' timestamp"
-                )
+                errors.append(f"{item_id}: resolved=true but missing 'fixed' timestamp")
 
             req_refs = item.get("requirement_refs")
             if not req_refs or not isinstance(req_refs, list) or len(req_refs) == 0:
-                errors.append(
-                    f"{item_id}: resolved=true but missing 'requirement_refs'"
-                )
+                errors.append(f"{item_id}: resolved=true but missing 'requirement_refs'")
 
             test_refs = item.get("test_refs")
             if not test_refs or not isinstance(test_refs, list) or len(test_refs) == 0:
-                errors.append(
-                    f"{item_id}: resolved=true but missing 'test_refs'"
-                )
+                errors.append(f"{item_id}: resolved=true but missing 'test_refs'")
 
     return errors
 

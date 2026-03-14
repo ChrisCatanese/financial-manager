@@ -118,10 +118,7 @@ class TestNoStaleDocLinks:
                 if not target.exists():
                     rel = md_file.relative_to(ROOT)
                     broken.append(f"  {rel}: -> {link}")
-        assert not broken, (
-            "DOC-04: Broken internal links in docs/requirements/:\n"
-            + "\n".join(broken[:20])
-        )
+        assert not broken, "DOC-04: Broken internal links in docs/requirements/:\n" + "\n".join(broken[:20])
 
 
 class TestDocTitleHeadings:
@@ -136,10 +133,7 @@ class TestDocTitleHeadings:
                 first_heading = re.search(r"^#\s+", text, re.MULTILINE)
                 if not first_heading or first_heading.start() > 200:
                     no_title.append(str(md_file.relative_to(ROOT)))
-        assert not no_title, (
-            "DOC-05: Docs missing title heading:\n"
-            + "\n".join(f"  - {f}" for f in no_title)
-        )
+        assert not no_title, "DOC-05: Docs missing title heading:\n" + "\n".join(f"  - {f}" for f in no_title)
 
 
 class TestDocNamingConventions:
@@ -158,10 +152,7 @@ class TestDocNamingConventions:
                 continue
             if not self._KEBAB_RE.match(f.stem):
                 bad.append(str(f.relative_to(ROOT)))
-        assert not bad, (
-            "DOC-06: Non-kebab-case .md files found in docs/:\n"
-            + "\n".join(f"  - {f}" for f in bad)
-        )
+        assert not bad, "DOC-06: Non-kebab-case .md files found in docs/:\n" + "\n".join(f"  - {f}" for f in bad)
 
 
 class TestReadmeQuality:

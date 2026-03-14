@@ -167,13 +167,9 @@ class TestCheckIdSequential:
             for i in range(1, len(nums)):
                 gap = nums[i] - nums[i - 1]
                 if gap > self.MAX_GAP:
-                    large_gaps.append(
-                        f"  {prefix}: gap between {nums[i - 1]} and {nums[i]} (gap={gap})"
-                    )
+                    large_gaps.append(f"  {prefix}: gap between {nums[i - 1]} and {nums[i]} (gap={gap})")
 
-        assert not large_gaps, (
-            "DINT-03: Large gaps in check ID sequences:\n" + "\n".join(large_gaps)
-        )
+        assert not large_gaps, "DINT-03: Large gaps in check ID sequences:\n" + "\n".join(large_gaps)
 
 
 # ── DINT-04: Change-log entries carry traceability ───────────────────
@@ -225,13 +221,9 @@ class TestManifestEnforcement:
         assert MANIFEST.exists(), "DINT-05: dq-manifest.yaml missing"
         data = yaml.safe_load(MANIFEST.read_text(encoding="utf-8"))
         level = data.get("enforcement")
-        assert level in {"strict", "warn", "off"}, (
-            f"DINT-05: enforcement must be strict|warn|off, got {level!r}"
-        )
+        assert level in {"strict", "warn", "off"}, f"DINT-05: enforcement must be strict|warn|off, got {level!r}"
 
     def test_change_log_path_declared(self) -> None:
         """Manifest should declare the change_log path."""
         data = yaml.safe_load(MANIFEST.read_text(encoding="utf-8"))
-        assert "change_log" in data, (
-            "DINT-05: dq-manifest.yaml missing 'change_log' path declaration"
-        )
+        assert "change_log" in data, "DINT-05: dq-manifest.yaml missing 'change_log' path declaration"

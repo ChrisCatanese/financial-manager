@@ -47,9 +47,9 @@ class TestTaxInput:
             TaxInput(gross_income=-1000)
 
     def test_invalid_year_rejected(self):
-        """Tax year outside 2024-2025 range should be rejected."""
+        """Tax year outside 2023-2025 range should be rejected."""
         with pytest.raises(ValidationError):
-            TaxInput(gross_income=50_000, tax_year=2023)
+            TaxInput(gross_income=50_000, tax_year=2022)
 
     def test_all_fields_populated(self):
         """All fields should be assignable."""

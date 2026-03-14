@@ -54,9 +54,7 @@ def _python_files_in(directory: Path) -> list[Path]:
 
 def _production_modules() -> list[Path]:
     """Non-exempt .py files in src/ (the core package)."""
-    return [
-        f for f in _python_files_in(PACKAGE_DIR) if f.name not in ALWAYS_EXEMPT
-    ]
+    return [f for f in _python_files_in(PACKAGE_DIR) if f.name not in ALWAYS_EXEMPT]
 
 
 def _module_rel_path(filepath: Path) -> str:
@@ -273,9 +271,7 @@ class TestNoLooseScripts:
                 continue
             # Check for argparse / click / main execution patterns at module level
             has_argparse = "argparse" in content and "parse_args" in content
-            has_main_block = re.search(
-                r'^if\s+__name__\s*==\s*["\']__main__["\']\s*:', content, re.MULTILINE
-            )
+            has_main_block = re.search(r'^if\s+__name__\s*==\s*["\']__main__["\']\s*:', content, re.MULTILINE)
             if has_argparse and has_main_block:
                 # This is OK for CLI tools within a package — just flag scripts
                 # that look like standalone executables
@@ -306,6 +302,5 @@ class TestDocsKebabCase:
                 bad.append(str(f.relative_to(ROOT)))
         assert not bad, (
             "CTRC-07: Non-kebab-case .md files in docs/ "
-            "(rename to kebab-case, e.g. my-document.md):\n"
-            + "\n".join(f"  - {f}" for f in bad)
+            "(rename to kebab-case, e.g. my-document.md):\n" + "\n".join(f"  - {f}" for f in bad)
         )

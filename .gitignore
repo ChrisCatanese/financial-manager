@@ -69,3 +69,4 @@ sandbox/*
 !sandbox/.gitkeep
 scratch/*
 !scratch/.gitkeep
+.cache/

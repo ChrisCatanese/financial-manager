@@ -128,8 +128,7 @@ class TestNoHardcodedSecrets:
         re.IGNORECASE,
     )
     _SAFE = re.compile(
-        r"""(placeholder|example|your[-_]?|xxx|changeme|TODO|FIXME"""
-        r"""|test[-_]?|dummy|mock|fake|sample)""",
+        r"""(placeholder|example|your[-_]?|xxx|changeme|TODO|FIXME""" r"""|test[-_]?|dummy|mock|fake|sample)""",
         re.IGNORECASE,
     )
 
@@ -144,8 +143,7 @@ class TestNoConnectionStrings:
     """SEC-07: No connection strings with embedded credentials."""
 
     _PATTERN = re.compile(
-        r"""(jdbc:|odbc:|mongodb(\+srv)?://|postgres(ql)?://|mysql://"""
-        r"""|mssql://|Server=|Data Source=)""",
+        r"""(jdbc:|odbc:|mongodb(\+srv)?://|postgres(ql)?://|mysql://""" r"""|mssql://|Server=|Data Source=)""",
         re.IGNORECASE,
     )
 

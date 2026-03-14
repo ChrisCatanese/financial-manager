@@ -181,9 +181,7 @@ class TaxCalculator:
         total_tax = float(ordinary_tax + preferential_tax)
 
         # IRS worksheet line 26: full progressive tax for comparison
-        full_progressive_raw, _, _ = self.compute_progressive_tax(
-            taxable_income, tax_year, filing_status
-        )
+        full_progressive_raw, _, _ = self.compute_progressive_tax(taxable_income, tax_year, filing_status)
         full_progressive = float(round(full_progressive_raw))
 
         # IRS worksheet line 27: tax = min(QDCG worksheet tax, regular tax)
@@ -246,7 +244,7 @@ class TaxCalculator:
         taxable_income = max(0.0, taxable_before_qbi - qbi)
 
         # Step 4: Compute income tax (line 16)
-        has_preferential = (tax_input.qualified_dividends > 0 or tax_input.net_capital_gains > 0)
+        has_preferential = tax_input.qualified_dividends > 0 or tax_input.net_capital_gains > 0
 
         if has_preferential:
             income_tax, marginal_rate, brackets = self.compute_qdcg_tax(

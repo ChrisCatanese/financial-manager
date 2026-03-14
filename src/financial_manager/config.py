@@ -84,6 +84,7 @@ def get_config_value(key: str, default: object = None) -> object:
 
 # ── Document source path (convenience) ────────────────────────────────
 
+
 def get_document_source_path() -> str | None:
     """Get the configured path to the tax documents folder.
 
@@ -104,6 +105,7 @@ def set_document_source_path(path: str) -> None:
 
 
 # ── Keychain integration (macOS) ──────────────────────────────────────
+
 
 def store_secret(key: str, value: str) -> bool:
     """Store a secret in the system keychain.

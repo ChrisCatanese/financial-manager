@@ -48,10 +48,7 @@ class TestPythonFileNaming:
                 continue
             if not SNAKE_CASE_RE.match(stem):
                 violations.append(str(fpath.relative_to(ROOT)))
-        assert not violations, (
-            "NAME-01: Non-snake_case Python files:\n"
-            + "\n".join(f"  {v}" for v in violations)
-        )
+        assert not violations, "NAME-01: Non-snake_case Python files:\n" + "\n".join(f"  {v}" for v in violations)
 
 
 class TestTestFileNaming:
@@ -70,9 +67,8 @@ class TestTestFileNaming:
                 continue
             if not stem.startswith("test_"):
                 violations.append(str(fpath.relative_to(ROOT)))
-        assert not violations, (
-            "NAME-02: Test files not following test_*.py convention:\n"
-            + "\n".join(f"  {v}" for v in violations)
+        assert not violations, "NAME-02: Test files not following test_*.py convention:\n" + "\n".join(
+            f"  {v}" for v in violations
         )
 
 
@@ -95,22 +91,23 @@ class TestClassNaming:
                     if self._EXEMPT.match(name):
                         continue
                     if not PASCAL_CASE_RE.match(name):
-                        violations.append(
-                            f"  {fpath.relative_to(ROOT)}:{node.lineno}: "
-                            f"class {name}"
-                        )
-        assert not violations, (
-            "NAME-03: Classes not using PascalCase:\n"
-            + "\n".join(violations)
-        )
+                        violations.append(f"  {fpath.relative_to(ROOT)}:{node.lineno}: " f"class {name}")
+        assert not violations, "NAME-03: Classes not using PascalCase:\n" + "\n".join(violations)
 
 
 class TestConstantNaming:
     """NAME-04: Module-level constants should use UPPER_SNAKE_CASE."""
 
-    _EXEMPT = frozenset({
-        "__all__", "__version__", "__author__", "logger", "app", "log",
-    })
+    _EXEMPT = frozenset(
+        {
+            "__all__",
+            "__version__",
+            "__author__",
+            "logger",
+            "app",
+            "log",
+        }
+    )
 
     def test_src_constants_naming(self):
         """All-caps module-level names must use UPPER_SNAKE_CASE."""
@@ -128,11 +125,5 @@ class TestConstantNaming:
                             if name in self._EXEMPT or name.startswith("_"):
                                 continue
                             if name.isupper() and not UPPER_SNAKE_RE.match(name):
-                                violations.append(
-                                    f"  {fpath.relative_to(ROOT)}:{node.lineno}: "
-                                    f"{name}"
-                                )
-        assert not violations, (
-            "NAME-04: Constants not using UPPER_SNAKE_CASE:\n"
-            + "\n".join(violations)
-        )
+                                violations.append(f"  {fpath.relative_to(ROOT)}:{node.lineno}: " f"{name}")
+        assert not violations, "NAME-04: Constants not using UPPER_SNAKE_CASE:\n" + "\n".join(violations)
