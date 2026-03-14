@@ -5,6 +5,13 @@ Pre-commit hook: ensures every change-log entry has required fields,
 valid types/severity, scope declarations, and that resolved items include
 full traceability (requirement_refs, test_refs, requirement_change, fixed).
 
+Check IDs:
+  VLID-1: JSON structure and _meta section present
+  VLID-2: Required fields on every item
+  VLID-3: Type and severity values are valid
+  VLID-4: Scope is present and well-formed on open entries
+  VLID-5: Resolved entries have full traceability metadata
+
 Zero dependencies beyond the stdlib.
 """
 

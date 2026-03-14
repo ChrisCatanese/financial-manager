@@ -42,3 +42,14 @@
 | FR-011 | BR-004 | The system SHALL expose a REST API endpoint that accepts tax input and returns calculated results. | POST /api/v1/calculate returns 200 with correct JSON. | Approved |
 | FR-012 | BR-004 | The frontend SHALL provide a form for entering income, filing status, deductions, and credits. | All input fields render, validate, and submit correctly. | Approved |
 | FR-013 | BR-005 | The frontend SHALL display tax results with a visual bracket breakdown. | Results page shows total tax, effective rate, marginal rate, and per-bracket detail. | Approved |
+
+## Document Intake Pipeline
+
+| ID | Parent BR | Requirement | Acceptance Criteria | Status |
+|----|-----------|-------------|---------------------|--------|
+| FR-014 | BR-010 | The system SHALL accept a tax profile with filing status, employment, real estate, investment, and deduction situation flags. | Profile model stores ~30 situation flags; API accepts and returns profile. | Approved |
+| FR-015 | BR-010 | The system SHALL generate a document checklist based on the tax profile. | Checklist includes all required document types given the profile flags. | Approved |
+| FR-016 | BR-010 | The system SHALL scan a local folder and classify tax documents by filename patterns. | Scanner identifies 30+ document types via regex; matches to checklist items. | Approved |
+| FR-017 | BR-010 | The system SHALL extract structured data from PDF tax documents (W-2, 1099s, 1098, Closing Disclosure). | Extracted amounts match source PDFs ±$0.01. | Approved |
+| FR-018 | BR-010 | The system SHALL provide document type and status models for tracking collection progress. | DocumentItem tracks type, status, source path, extracted data. | Approved |
+| FR-019 | BR-011 | The system SHALL compute itemized deductions with SALT cap, medical AGI threshold, and solar credit. | SALT capped at $10K/$5K MFS; medical net of 7.5% AGI; solar at 30%. | Approved |

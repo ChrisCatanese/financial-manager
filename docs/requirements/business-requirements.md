@@ -20,3 +20,5 @@
 | BR-007 | The system SHALL support common tax credits (Child Tax Credit, EITC). | Credits reduce tax liability and are critical for accurate calculations. | Should | Approved |
 | BR-008 | The system SHALL support capital gains tax calculations. | Many taxpayers have investment income requiring different tax rate treatment. | Should | Draft |
 | BR-009 | The system SHALL calculate Alternative Minimum Tax (AMT). | Higher-income taxpayers may be subject to AMT; this is needed for complete calculations. | Could | Draft |
+| BR-010 | The system SHALL provide a document intake pipeline that identifies, collects, and extracts data from tax documents. | Users have tax documents scattered across folders; automated discovery and extraction reduces manual effort and errors. | Must | Approved |
+| BR-011 | The system SHALL support detailed itemized deduction calculations with IRS limits. | Itemized deductions require SALT cap enforcement, medical threshold, and credit calculations (e.g., solar). | Should | Approved |

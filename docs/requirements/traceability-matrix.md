@@ -23,6 +23,13 @@
 | TR-007 | FR-011 | BR-004 | `src/financial_manager/api/main.py` | `tests/test_api.py` | Implemented |
 | TR-008 | FR-011, FR-012 | BR-004 | `src/financial_manager/models/tax_input.py` | `tests/test_models.py` | Implemented |
 | TR-009 | FR-011, FR-013 | BR-004, BR-005 | `src/financial_manager/models/tax_result.py` | `tests/test_models.py` | Implemented |
+| TR-010 | FR-014 | BR-010 | `src/financial_manager/models/tax_profile.py` | `tests/test_profile_and_documents.py` | Implemented |
+| TR-011 | FR-018 | BR-010 | `src/financial_manager/models/tax_document.py` | `tests/test_profile_and_documents.py` | Implemented |
+| TR-012 | FR-015 | BR-010 | `src/financial_manager/engine/checklist.py` | `tests/test_checklist.py` | Implemented |
+| TR-013 | FR-016 | BR-010 | `src/financial_manager/engine/scanner.py` | `tests/test_scanner.py` | Implemented |
+| TR-014 | FR-017 | BR-010 | `src/financial_manager/engine/extractor.py` | `tests/test_api_documents.py` | Implemented |
+| TR-015 | FR-019 | BR-011 | `src/financial_manager/engine/itemized.py` | `tests/test_itemized.py` | Implemented |
+| TR-016 | FR-014 | BR-010 | `src/financial_manager/config.py` | `tests/test_api_documents.py` | Implemented |
 
 ## Module Index (all src/ modules)
 
@@ -41,6 +48,13 @@
 | `src/financial_manager/data/standard_deductions.py` | TR-004 |
 | `src/financial_manager/api/__init__.py` | — (package init) |
 | `src/financial_manager/api/main.py` | TR-007 |
+| `src/financial_manager/config.py` | TR-016 |
+| `src/financial_manager/engine/checklist.py` | TR-012 |
+| `src/financial_manager/engine/extractor.py` | TR-014 |
+| `src/financial_manager/engine/itemized.py` | TR-015 |
+| `src/financial_manager/engine/scanner.py` | TR-013 |
+| `src/financial_manager/models/tax_document.py` | TR-011 |
+| `src/financial_manager/models/tax_profile.py` | TR-010 |
 
 ## Reverse Traceability (BR → FR → TR)
 
@@ -52,14 +66,16 @@
 | BR-004 | FR-011, FR-012, FR-013 | TR-007, TR-008, TR-009 |
 | BR-005 | FR-006, FR-013 | TR-006, TR-009 |
 | BR-006 | FR-004 | TR-004 |
+| BR-010 | FR-014, FR-015, FR-016, FR-017, FR-018 | TR-010, TR-011, TR-012, TR-013, TR-014, TR-016 |
+| BR-011 | FR-019 | TR-015 |
 
 ## Coverage Summary
 
 | Metric | Count |
 |--------|-------|
-| Total TRs | 9 |
+| Total TRs | 16 |
 | Draft | 0 |
-| Implemented | 9 |
+| Implemented | 16 |
 | Validated | 0 |
 | Coverage | 100% (implemented) |
 
