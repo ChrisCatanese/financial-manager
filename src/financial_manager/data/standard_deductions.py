@@ -23,11 +23,12 @@ STANDARD_DEDUCTIONS: dict[tuple[int, FilingStatus], float] = {
     (2024, FilingStatus.HEAD_OF_HOUSEHOLD): 21_900,
     (2024, FilingStatus.QUALIFYING_SURVIVING_SPOUSE): 29_200,
     # ── 2025 ─────────────────────────────────────────────────────────
-    (2025, FilingStatus.SINGLE): 15_000,
-    (2025, FilingStatus.MARRIED_FILING_JOINTLY): 30_000,
-    (2025, FilingStatus.MARRIED_FILING_SEPARATELY): 15_000,
-    (2025, FilingStatus.HEAD_OF_HOUSEHOLD): 22_500,
-    (2025, FilingStatus.QUALIFYING_SURVIVING_SPOUSE): 30_000,
+    # Source: IRS Rev. Proc. 2024-40, updated per Pub. L. 119-2 (TCJA extension)
+    (2025, FilingStatus.SINGLE): 15_750,
+    (2025, FilingStatus.MARRIED_FILING_JOINTLY): 31_500,
+    (2025, FilingStatus.MARRIED_FILING_SEPARATELY): 15_750,
+    (2025, FilingStatus.HEAD_OF_HOUSEHOLD): 23_625,
+    (2025, FilingStatus.QUALIFYING_SURVIVING_SPOUSE): 31_500,
 }
 
 

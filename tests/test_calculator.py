@@ -162,12 +162,12 @@ class TestTaxYear2025:
             tax_year=2025,
         )
         result = calc.calculate(tax_input)
-        # Taxable = 50,000 - 15,000 = 35,000
-        assert result.taxable_income == 35_000.0
-        assert result.standard_deduction == 15_000.0
+        # Taxable = 50,000 - 15,750 = 34,250
+        assert result.taxable_income == 34_250.0
+        assert result.standard_deduction == 15_750.0
         # 10% on 0-11,925 = 1,192.50
-        # 12% on 11,925-35,000 = 23,075 * 0.12 = 2,769.00
-        expected_tax = 1_192.50 + 2_769.00
+        # 12% on 11,925-34,250 = 22,325 * 0.12 = 2,679.00
+        expected_tax = 1_192.50 + 2_679.00
         assert result.total_tax == expected_tax
 
 

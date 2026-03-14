@@ -105,4 +105,4 @@ class TestCalculateEndpoint:
         assert response.status_code == 200
         data = response.json()
         assert data["tax_year"] == 2025
-        assert data["standard_deduction"] == 15_000
+        assert data["standard_deduction"] == 15_750
