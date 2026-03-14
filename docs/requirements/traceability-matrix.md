@@ -30,6 +30,9 @@
 | TR-014 | FR-017 | BR-010 | `src/financial_manager/engine/extractor.py` | `tests/test_api_documents.py` | Implemented |
 | TR-015 | FR-019 | BR-011 | `src/financial_manager/engine/itemized.py` | `tests/test_itemized.py` | Implemented |
 | TR-016 | FR-014 | BR-010 | `src/financial_manager/config.py` | `tests/test_api_documents.py` | Implemented |
+| TR-018 | FR-020 | BR-010 | `src/financial_manager/engine/intake.py` | `tests/test_intake_pipeline.py` | Implemented |
+| TR-019 | FR-021 | BR-010 | `src/financial_manager/engine/extractors.py` | `tests/test_intake_pipeline.py` | Implemented |
+| TR-020 | FR-022 | BR-010 | `src/financial_manager/engine/assembler.py` | `tests/test_intake_pipeline.py` | Implemented |
 
 ## Module Index (all src/ modules)
 
@@ -54,6 +57,9 @@
 | `src/financial_manager/engine/extractor.py` | TR-014 |
 | `src/financial_manager/engine/itemized.py` | TR-015 |
 | `src/financial_manager/engine/scanner.py` | TR-013 |
+| `src/financial_manager/engine/intake.py` | TR-018 |
+| `src/financial_manager/engine/extractors.py` | TR-019 |
+| `src/financial_manager/engine/assembler.py` | TR-020 |
 | `src/financial_manager/models/tax_document.py` | TR-011 |
 | `src/financial_manager/models/tax_profile.py` | TR-010 |
 
@@ -67,7 +73,7 @@
 | BR-004 | FR-011, FR-012, FR-013 | TR-007, TR-008, TR-009 |
 | BR-005 | FR-006, FR-013 | TR-006, TR-009 |
 | BR-006 | FR-004 | TR-004 |
-| BR-010 | FR-014, FR-015, FR-016, FR-017, FR-018 | TR-010, TR-011, TR-012, TR-013, TR-014, TR-016 |
+| BR-010 | FR-014, FR-015, FR-016, FR-017, FR-018, FR-020, FR-021, FR-022 | TR-010, TR-011, TR-012, TR-013, TR-014, TR-016, TR-018, TR-019, TR-020 |
 | BR-011 | FR-019 | TR-015 |
 
 ## Coverage Summary
