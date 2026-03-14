@@ -46,6 +46,7 @@
 | `src/financial_manager/data/__init__.py` | — (package init) |
 | `src/financial_manager/data/tax_brackets.py` | TR-003 |
 | `src/financial_manager/data/standard_deductions.py` | TR-004 |
+| `src/financial_manager/data/capital_gains_rates.py` | TR-017 |
 | `src/financial_manager/api/__init__.py` | — (package init) |
 | `src/financial_manager/api/main.py` | TR-007 |
 | `src/financial_manager/config.py` | TR-016 |

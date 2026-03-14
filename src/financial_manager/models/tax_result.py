@@ -35,8 +35,13 @@ class TaxResult(BaseModel):
         agi: Adjusted Gross Income.
         standard_deduction: Standard deduction amount for the filing status.
         deduction_used: Actual deduction applied (max of standard vs itemized).
-        taxable_income: Income subject to tax (AGI - deduction).
-        total_tax: Total federal income tax liability.
+        qbi_deduction: Qualified Business Income deduction applied.
+        taxable_income: Income subject to tax (AGI - deduction - QBI).
+        income_tax: Federal income tax (line 16) computed via QDCG or progressive.
+        additional_medicare_tax: Additional Medicare Tax (0.9% on excess wages).
+        total_tax: Total federal tax liability (income_tax + additional taxes).
+        total_withholding: Federal income tax withheld.
+        refund_or_owed: Positive = refund, negative = amount owed.
         effective_rate: Total tax / gross income.
         marginal_rate: Highest bracket rate that applies.
         brackets: Per-bracket breakdown of the calculation.
@@ -48,8 +53,13 @@ class TaxResult(BaseModel):
     agi: float
     standard_deduction: float
     deduction_used: float
+    qbi_deduction: float = Field(default=0.0, description="QBI deduction applied")
     taxable_income: float
+    income_tax: float = Field(default=0.0, description="Line 16 income tax")
+    additional_medicare_tax: float = Field(default=0.0, description="Additional Medicare Tax (Form 8959)")
     total_tax: float
+    total_withholding: float = Field(default=0.0, description="Total federal withholding")
+    refund_or_owed: float = Field(default=0.0, description="Positive=refund, negative=owed")
     effective_rate: float = Field(..., description="Effective tax rate (total_tax / gross_income)")
     marginal_rate: float = Field(..., description="Marginal (highest applicable) tax rate")
     brackets: list[BracketResult] = Field(default_factory=list, description="Per-bracket breakdown")
