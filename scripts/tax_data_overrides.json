@@ -1,0 +1,10 @@
+{
+    "_comment": "Known corrections for Tax-Calculator data. Keyed by param:year:mars.",
+    "overrides": {
+        "II_brk6:2023:mseparate": {
+            "value": 346875,
+            "irs_source": "IRS Rev. Proc. 2022-38, Table 4",
+            "note": "TC bug: uses Single bracket ($578,125) for MFS. Correct = MFJ/2 = $693,750/2 = $346,875"
+        }
+    }
+}

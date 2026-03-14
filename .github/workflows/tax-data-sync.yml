@@ -1,0 +1,74 @@
+name: Tax Data Sync Check
+
+on:
+  schedule:
+    # Run every Monday at 8am UTC
+    - cron: '0 8 * * 1'
+  workflow_dispatch:  # Allow manual trigger
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check-tax-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -e ".[dev]"
+
+      - name: Download upstream Tax-Calculator data
+        run: python scripts/sync_tax_data.py download --force
+
+      - name: Check data files against upstream
+        id: check
+        run: python scripts/sync_tax_data.py check
+        continue-on-error: true
+
+      - name: Run cross-validation tests
+        run: pytest tests/test_cross_validation.py -v
+
+      - name: Create issue if data is stale
+        if: steps.check.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = 'Tax data out of sync with Tax-Calculator upstream';
+            const body = `The weekly tax data sync check detected that our data files
+            differ from the upstream PSLmodels/Tax-Calculator data.
+
+            **Action required:**
+            \`\`\`bash
+            python scripts/sync_tax_data.py generate --force
+            ruff format src/financial_manager/data/
+            pytest tests/ -v
+            \`\`\`
+
+            Then commit and push the updated data files.
+
+            This was detected by the [Tax Data Sync Check workflow](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}).`;
+
+            // Check for existing open issue
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'tax-data-sync'
+            });
+
+            if (issues.data.length === 0) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: title,
+                body: body,
+                labels: ['tax-data-sync', 'automated']
+              });
+            }
