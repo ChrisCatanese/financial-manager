@@ -1,0 +1,64 @@
+# ============================================================================
+# git-crypt: Transparent Encryption for Sensitive Files
+# ============================================================================
+# Files matching these patterns are encrypted at rest in the repository.
+# They appear as normal plaintext when the repo is unlocked (after `git-crypt unlock`).
+# When locked (or on GitHub), they're AES-256 encrypted binary blobs.
+#
+# To unlock:  git-crypt unlock /path/to/financial-manager-git-crypt.key
+# To lock:    git-crypt lock
+# To check:   git-crypt status
+# ============================================================================
+
+# ---------------------------------------------------------------------------
+# Tax preparation working notes (names, addresses, wages, account numbers)
+# ---------------------------------------------------------------------------
+docs/tax-prep-notes-*.md filter=git-crypt diff=git-crypt
+
+# ---------------------------------------------------------------------------
+# Validation tests containing real accepted tax return data
+# (W-2 wages, 1099 amounts, employer names, 1040 line items)
+# ---------------------------------------------------------------------------
+tests/test_2024_validation.py filter=git-crypt diff=git-crypt
+tests/test_2025_validation.py filter=git-crypt diff=git-crypt
+
+# ---------------------------------------------------------------------------
+# Pipeline tests with real document filenames, addresses, financial figures
+# ---------------------------------------------------------------------------
+tests/test_intake_pipeline.py filter=git-crypt diff=git-crypt
+
+# ---------------------------------------------------------------------------
+# Checklist tests referencing real names and scenarios
+# ---------------------------------------------------------------------------
+tests/test_checklist.py filter=git-crypt diff=git-crypt
+
+# ---------------------------------------------------------------------------
+# Scanner tests with real document filenames (account numbers, names)
+# ---------------------------------------------------------------------------
+tests/test_scanner.py filter=git-crypt diff=git-crypt
+
+# ---------------------------------------------------------------------------
+# Engine modules with hardcoded PII (iCloud paths, names, addresses)
+# ---------------------------------------------------------------------------
+src/financial_manager/engine/intake.py filter=git-crypt diff=git-crypt
+src/financial_manager/engine/assembler.py filter=git-crypt diff=git-crypt
+src/financial_manager/engine/extractors.py filter=git-crypt diff=git-crypt
+src/financial_manager/engine/scanner.py filter=git-crypt diff=git-crypt
+src/financial_manager/engine/checklist.py filter=git-crypt diff=git-crypt
+
+# ---------------------------------------------------------------------------
+# CLI script with hardcoded family-specific references
+# ---------------------------------------------------------------------------
+scripts/assemble_2025.py filter=git-crypt diff=git-crypt
+
+# ---------------------------------------------------------------------------
+# Change log (may contain file paths and component references with PII)
+# ---------------------------------------------------------------------------
+docs/change-log.json filter=git-crypt diff=git-crypt
+
+# ---------------------------------------------------------------------------
+# Future-proofing: any tax data files added later
+# ---------------------------------------------------------------------------
+data/tax-documents/** filter=git-crypt diff=git-crypt
+data/bank-statements/** filter=git-crypt diff=git-crypt
+*.tax filter=git-crypt diff=git-crypt
