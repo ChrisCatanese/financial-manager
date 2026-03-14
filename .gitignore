@@ -57,6 +57,7 @@ credentials.json
 *.secret
 *.pem
 *.key
+config/local.json
 
 # Frontend
 frontend/node_modules/

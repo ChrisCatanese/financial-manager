@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import App from '../App';
 
 describe('App', () => {
@@ -8,20 +8,29 @@ describe('App', () => {
     expect(screen.getByText('Financial Manager')).toBeInTheDocument();
   });
 
-  it('renders the tax form', () => {
+  it('renders navigation buttons', () => {
     render(<App />);
+    expect(screen.getByText('Profile')).toBeInTheDocument();
+    expect(screen.getByText('Documents')).toBeInTheDocument();
+    expect(screen.getByText('Calculator')).toBeInTheDocument();
+  });
+
+  it('renders the profile wizard by default', () => {
+    render(<App />);
+    expect(screen.getByText('Filing Information')).toBeInTheDocument();
+    expect(screen.getByText('Continue →')).toBeInTheDocument();
+  });
+
+  it('navigates to calculator view', () => {
+    render(<App />);
+    fireEvent.click(screen.getByText('Calculator'));
     expect(screen.getByLabelText('Gross Income')).toBeInTheDocument();
-    expect(screen.getByLabelText('Filing Status')).toBeInTheDocument();
-    expect(screen.getByLabelText('Tax Year')).toBeInTheDocument();
-  });
-
-  it('renders the placeholder when no results', () => {
-    render(<App />);
-    expect(screen.getByText('Enter your information')).toBeInTheDocument();
-  });
-
-  it('has a calculate button', () => {
-    render(<App />);
     expect(screen.getByRole('button', { name: /calculate tax/i })).toBeInTheDocument();
+  });
+
+  it('navigates to documents view', () => {
+    render(<App />);
+    fireEvent.click(screen.getByText('Documents'));
+    expect(screen.getByText(/No Checklist Yet/)).toBeInTheDocument();
   });
 });
