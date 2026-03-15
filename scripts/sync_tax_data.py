@@ -37,10 +37,7 @@ SRC_DATA = ROOT / "src" / "financial_manager" / "data"
 OVERRIDES_PATH = ROOT / "scripts" / "tax_data_overrides.json"
 
 # ── Configuration ────────────────────────────────────────────────────
-TC_RAW_URL = (
-    "https://raw.githubusercontent.com/PSLmodels/Tax-Calculator"
-    "/master/taxcalc/policy_current_law.json"
-)
+TC_RAW_URL = "https://raw.githubusercontent.com/PSLmodels/Tax-Calculator" "/master/taxcalc/policy_current_law.json"
 SUPPORTED_YEARS: list[int] = [2023, 2024, 2025]
 REV_PROC_SOURCES: dict[int, str] = {
     2023: "IRS Rev. Proc. 2022-38",

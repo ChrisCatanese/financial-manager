@@ -1,0 +1,131 @@
+# ============================================================================
+# Financial Manager — User Configuration (Example / Template)
+# ============================================================================
+# Copy this file to user-config.yaml and fill in your details.
+# user-config.yaml is gitignored — your personal data stays local.
+# ============================================================================
+
+# ── Tax Year & Filing Status ─────────────────────────────────────────
+# tax_year:      The calendar year this return covers.
+# filing_status: One of:
+#   single | married_filing_jointly | married_filing_separately
+#   head_of_household | qualifying_surviving_spouse
+tax_year: 2025
+filing_status: married_filing_jointly
+
+# ── Primary Filer ─────────────────────────────────────────────────────
+# The taxpayer whose SSN appears first on the return.
+# employers:  list each W-2 employer by name.
+primary_filer:
+  first_name: ""
+  last_name: ""
+  employers: []
+  # - name: "Acme Corp"
+
+# ── Spouse ────────────────────────────────────────────────────────────
+# Required for married_filing_jointly or married_filing_separately.
+# Leave fields empty for single / head_of_household filers.
+spouse:
+  first_name: ""
+  last_name: ""
+  employers: []
+  # - name: "Globex Inc"
+
+# ── Dependents ────────────────────────────────────────────────────────
+# List each qualifying dependent (for Child Tax Credit, EITC, etc.).
+# relationship: child | stepchild | foster_child | sibling | parent | other
+dependents: []
+# - first_name: "Jane"
+#   last_name: "Doe"
+#   date_of_birth: "2015-06-15"
+#   relationship: child
+
+# ── Properties ────────────────────────────────────────────────────────
+# Real estate owned, purchased, or sold during the tax year.
+#
+# Fields:
+#   label:            Short display name (e.g. "Main Home", "Rental")
+#   address / city / state / zip_code: Physical address
+#   property_type:    single_family | condo | townhouse | multi_family | land
+#   role:             primary_residence | purchased | sold | rental | investment
+#   folder_context:   Maps to a document-scan folder context (see folders below)
+#   section_121_eligible: (sold only) Qualifies for home-sale exclusion?
+#   mortgage:         Nested block for mortgage details
+#     servicer:       Name of mortgage servicer (for 1098 matching)
+#   solar:            Nested block for Residential Clean Energy Credit (§25D)
+#     installer:      Solar installer company name
+#     installed_date: Date placed in service (MM/DD/YYYY)
+#   tax_authority:    Property-tax jurisdiction
+#     municipality / county / state
+#   title_company:    (sold only) Settlement agent name
+properties: []
+# - label: "Main Home"
+#   address: "123 Main St"
+#   city: "Anytown"
+#   state: "NJ"
+#   zip_code: "07000"
+#   property_type: single_family
+#   role: primary_residence
+#   folder_context: house
+#   mortgage:
+#     servicer: "My Bank"
+#   solar:
+#     installer: "Solar Co"
+#     installed_date: "06/15/2025"
+#   tax_authority:
+#     municipality: "Anytown Township"
+#     county: "Sample"
+#     state: "NJ"
+
+# ── Financial Accounts ────────────────────────────────────────────────
+# Brokerage, bank, and retirement accounts that generate tax forms.
+#
+# Fields:
+#   institution:     Company name (for document matching)
+#   account_type:    brokerage | bank | retirement_401k | ira | hsa
+#   owner:           primary | spouse | joint
+#   expected_forms:  List of forms this account should produce, e.g.:
+#     1099_consolidated | 1099_int | 1099_div | 1099_b | 1099_r | 5498
+accounts: []
+# - institution: "Fidelity"
+#   account_type: brokerage
+#   owner: joint
+#   expected_forms: [1099_consolidated]
+# - institution: "Local Bank"
+#   account_type: bank
+#   owner: joint
+#   expected_forms: [1099_int]
+
+# ── Document Source Folders ───────────────────────────────────────────
+# Folders scanned for tax-relevant documents (PDFs, images, etc.).
+#
+# Fields:
+#   path:            Absolute or ~-relative path to the folder
+#   label:           Human-readable label shown in the checklist
+#   recursive:       true to include subfolders
+#   tax_year_filter: (optional) Only match docs for this tax year
+#   context:         tax | house | condo | general — affects classification
+folders:
+  - path: "~/Documents/Tax/2025"
+    label: "Tax/2025"
+    recursive: true
+    tax_year_filter: 2025
+    context: tax
+  - path: "~/Documents/Tax/2024"
+    label: "Tax/2024 (prior year)"
+    recursive: true
+    tax_year_filter: 2024
+    context: tax
+  # Add property-specific folders:
+  # - path: "~/Documents/House"
+  #   label: "House"
+  #   recursive: true
+  #   context: house
+
+# ── Known Facts ───────────────────────────────────────────────────────
+# Free-form notes for information that can't be extracted from documents.
+# Use these to remind yourself (or the engine) of important details.
+known_facts:
+  notes: []
+  # - "Solar placed in service Jun 15 2025"
+  # - "Sold condo — need original purchase price and date"

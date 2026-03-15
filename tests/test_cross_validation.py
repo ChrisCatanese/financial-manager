@@ -74,10 +74,7 @@ def policy_data() -> dict:
     """Load TC policy data, skip if not cached."""
     data = _load_policy()
     if data is None:
-        pytest.skip(
-            "Tax-Calculator policy JSON not cached. "
-            "Run 'python scripts/sync_tax_data.py download' first."
-        )
+        pytest.skip("Tax-Calculator policy JSON not cached. " "Run 'python scripts/sync_tax_data.py download' first.")
     return data
 
 
@@ -114,13 +111,9 @@ class TestBracketsMatchTC:
             if _is_overridden(overrides, param, year, mars):
                 # Verify our value matches the override, not TC
                 override_val = overrides[f"{param}:{year}:{mars}"]["value"]
-                assert our_val == override_val, (
-                    f"{param} {year}/{mars}: ours={our_val} != override={override_val}"
-                )
+                assert our_val == override_val, f"{param} {year}/{mars}: ours={our_val} != override={override_val}"
             else:
-                assert our_val == tc_val, (
-                    f"{param} {year}/{mars}: ours={our_val} != TC={tc_val}"
-                )
+                assert our_val == tc_val, f"{param} {year}/{mars}: ours={our_val} != TC={tc_val}"
 
 
 class TestDeductionsMatchTC:
@@ -147,9 +140,7 @@ class TestDeductionsMatchTC:
             override_val = overrides[f"STD:{year}:{mars}"]["value"]
             assert our_val == override_val
         else:
-            assert our_val == tc_val, (
-                f"STD {year}/{mars}: ours={our_val} != TC={tc_val}"
-            )
+            assert our_val == tc_val, f"STD {year}/{mars}: ours={our_val} != TC={tc_val}"
 
 
 class TestCapGainsMatchTC:
@@ -179,6 +170,4 @@ class TestCapGainsMatchTC:
                 override_val = overrides[f"{param}:{year}:{mars}"]["value"]
                 assert our_val == override_val
             else:
-                assert our_val == tc_val, (
-                    f"{param} {year}/{mars}: ours={our_val} != TC={tc_val}"
-                )
+                assert our_val == tc_val, f"{param} {year}/{mars}: ours={our_val} != TC={tc_val}"

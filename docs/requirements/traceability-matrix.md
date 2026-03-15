@@ -33,6 +33,7 @@
 | TR-018 | FR-020 | BR-010 | `src/financial_manager/engine/intake.py` | `tests/test_intake_pipeline.py` | Implemented |
 | TR-019 | FR-021 | BR-010 | `src/financial_manager/engine/extractors.py` | `tests/test_intake_pipeline.py` | Implemented |
 | TR-020 | FR-022 | BR-010 | `src/financial_manager/engine/assembler.py` | `tests/test_intake_pipeline.py` | Implemented |
+| TR-021 | FR-020 | BR-010 | `src/financial_manager/user_config.py` | `tests/test_user_config.py` | Implemented |
 
 ## Module Index (all src/ modules)
 
@@ -60,6 +61,7 @@
 | `src/financial_manager/engine/intake.py` | TR-018 |
 | `src/financial_manager/engine/extractors.py` | TR-019 |
 | `src/financial_manager/engine/assembler.py` | TR-020 |
+| `src/financial_manager/user_config.py` | TR-021 |
 | `src/financial_manager/models/tax_document.py` | TR-011 |
 | `src/financial_manager/models/tax_profile.py` | TR-010 |
 

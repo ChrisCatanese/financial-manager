@@ -58,6 +58,7 @@ credentials.json
 *.pem
 *.key
 config/local.json
+config/user-config.yaml
 
 # Frontend
 frontend/node_modules/
