@@ -86,15 +86,19 @@ properties: []
 #   owner:           primary | spouse | joint
 #   expected_forms:  List of forms this account should produce, e.g.:
 #     1099_consolidated | 1099_int | 1099_div | 1099_b | 1099_r | 5498
+#   export_path:     (optional) Folder where you save CSV/OFX/QFX downloads
+#                    from this institution.  Used by import_financial_data.py.
 accounts: []
 # - institution: "Fidelity"
 #   account_type: brokerage
 #   owner: joint
 #   expected_forms: [1099_consolidated]
+#   export_path: "~/Downloads/Fidelity"
 # - institution: "Local Bank"
 #   account_type: bank
 #   owner: joint
 #   expected_forms: [1099_int]
+#   export_path: "~/Downloads/Local Bank"
 
 # ── Document Source Folders ───────────────────────────────────────────
 # Folders scanned for tax-relevant documents (PDFs, images, etc.).

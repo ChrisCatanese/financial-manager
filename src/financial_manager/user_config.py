@@ -210,6 +210,7 @@ class FinancialAccount:
         name_patterns: Additional regex patterns for filename matching.
         owner: ``"primary"``, ``"spouse"``, or ``"joint"``.
         expected_forms: Tax forms expected from this account (e.g. ``["1099_consolidated"]``).
+        export_path: Path to folder where CSV/OFX/QFX exports from this institution are saved.
     """
 
     institution: str = ""
@@ -218,6 +219,7 @@ class FinancialAccount:
     name_patterns: list[str] = field(default_factory=list)
     owner: str = "primary"
     expected_forms: list[str] = field(default_factory=list)
+    export_path: str = ""
 
 
 # ── Folder layer ──────────────────────────────────────────────────────
@@ -651,6 +653,7 @@ def _parse_account(raw: dict) -> FinancialAccount:  # type: ignore[type-arg]
         name_patterns=[str(p) for p in raw.get("name_patterns", [])],
         owner=str(raw.get("owner", "primary")),
         expected_forms=[str(f) for f in raw.get("expected_forms", [])],
+        export_path=str(raw.get("export_path", "")),
     )
 
 

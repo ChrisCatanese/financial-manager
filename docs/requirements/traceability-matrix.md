@@ -62,6 +62,10 @@
 | `src/financial_manager/engine/extractors.py` | TR-019 |
 | `src/financial_manager/engine/assembler.py` | TR-020 |
 | `src/financial_manager/user_config.py` | TR-021 |
+| `src/financial_manager/connectors/__init__.py` | — (package init) |
+| `src/financial_manager/connectors/csv_importer.py` | TR-022 |
+| `src/financial_manager/connectors/ofx_importer.py` | TR-022 |
+| `src/financial_manager/connectors/data_mapper.py` | TR-022 |
 | `src/financial_manager/models/tax_document.py` | TR-011 |
 | `src/financial_manager/models/tax_profile.py` | TR-010 |
 
@@ -82,9 +86,9 @@
 
 | Metric | Count |
 |--------|-------|
-| Total TRs | 16 |
+| Total TRs | 17 |
 | Draft | 0 |
-| Implemented | 16 |
+| Implemented | 17 |
 | Validated | 0 |
 | Coverage | 100% (implemented) |
 
