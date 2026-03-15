@@ -10,15 +10,16 @@ describe('App', () => {
 
   it('renders navigation buttons', () => {
     render(<App />);
+    expect(screen.getByText('Dashboard')).toBeInTheDocument();
     expect(screen.getByText('Profile')).toBeInTheDocument();
     expect(screen.getByText('Documents')).toBeInTheDocument();
     expect(screen.getByText('Calculator')).toBeInTheDocument();
   });
 
-  it('renders the profile wizard by default', () => {
+  it('renders the pipeline dashboard by default', () => {
     render(<App />);
-    expect(screen.getByText('Filing Information')).toBeInTheDocument();
-    expect(screen.getByText('Continue →')).toBeInTheDocument();
+    expect(screen.getByText('Pipeline Dashboard')).toBeInTheDocument();
+    expect(screen.getByText('Run Full Pipeline')).toBeInTheDocument();
   });
 
   it('navigates to calculator view', () => {

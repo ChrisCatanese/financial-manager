@@ -54,6 +54,7 @@
 | `src/financial_manager/api/__init__.py` | — (package init) |
 | `src/financial_manager/api/main.py` | TR-007 |
 | `src/financial_manager/api/import_hub.py` | TR-022 |
+| `src/financial_manager/api/pipeline_routes.py` | TR-023 |
 | `src/financial_manager/config.py` | TR-016 |
 | `src/financial_manager/engine/checklist.py` | TR-012 |
 | `src/financial_manager/engine/extractor.py` | TR-014 |

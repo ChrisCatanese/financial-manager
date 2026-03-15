@@ -4,15 +4,16 @@ import { TaxResultDisplay } from './components/TaxResultDisplay';
 import { ProfileWizard } from './components/ProfileWizard';
 import { ChecklistDashboard } from './components/ChecklistDashboard';
 import { ImportHub } from './components/ImportHub';
+import { PipelineDashboard } from './components/PipelineDashboard';
 import { useTaxCalculator } from './hooks/useTaxCalculator';
 import { createProfile, getChecklist } from './services/documentApi';
 import type { TaxProfile, DocumentChecklist } from './types/documents';
 
-type AppView = 'setup' | 'checklist' | 'import' | 'calculator';
+type AppView = 'dashboard' | 'setup' | 'checklist' | 'import' | 'calculator';
 
 function App() {
   const { result, loading, error, calculate } = useTaxCalculator();
-  const [view, setView] = useState<AppView>('setup');
+  const [view, setView] = useState<AppView>('dashboard');
   const [profile, setProfile] = useState<TaxProfile | null>(null);
   const [checklist, setChecklist] = useState<DocumentChecklist | null>(null);
   const [setupError, setSetupError] = useState<string | null>(null);
@@ -33,6 +34,7 @@ function App() {
   };
 
   const navItems: { key: AppView; label: string; icon: string }[] = [
+    { key: 'dashboard', label: 'Dashboard', icon: '⚡' },
     { key: 'setup', label: 'Profile', icon: '👤' },
     { key: 'checklist', label: 'Documents', icon: '📋' },
     { key: 'import', label: 'Import', icon: '📥' },
@@ -77,6 +79,9 @@ function App() {
             <p className="text-sm">{setupError}</p>
           </div>
         )}
+
+        {/* Pipeline Dashboard */}
+        {view === 'dashboard' && <PipelineDashboard />}
 
         {/* Setup / Profile Wizard */}
         {view === 'setup' && (
