@@ -9,6 +9,7 @@ from pathlib import Path
 from fastapi import FastAPI, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
+from financial_manager.api.import_hub import router as import_router
 from financial_manager.engine.calculator import TaxCalculator
 from financial_manager.engine.checklist import generate_checklist
 from financial_manager.engine.extractor import extract_document
@@ -43,6 +44,9 @@ app.add_middleware(
 )
 
 _calculator = TaxCalculator()
+
+# ── Register sub-routers ──────────────────────────────────────────────
+app.include_router(import_router)
 
 # ── In-memory state (per-session) ─────────────────────────────────────
 # In production this would be persisted; for now we keep it in memory.

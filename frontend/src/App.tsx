@@ -3,11 +3,12 @@ import { TaxForm } from './components/TaxForm';
 import { TaxResultDisplay } from './components/TaxResultDisplay';
 import { ProfileWizard } from './components/ProfileWizard';
 import { ChecklistDashboard } from './components/ChecklistDashboard';
+import { ImportHub } from './components/ImportHub';
 import { useTaxCalculator } from './hooks/useTaxCalculator';
 import { createProfile, getChecklist } from './services/documentApi';
 import type { TaxProfile, DocumentChecklist } from './types/documents';
 
-type AppView = 'setup' | 'checklist' | 'calculator';
+type AppView = 'setup' | 'checklist' | 'import' | 'calculator';
 
 function App() {
   const { result, loading, error, calculate } = useTaxCalculator();
@@ -34,6 +35,7 @@ function App() {
   const navItems: { key: AppView; label: string; icon: string }[] = [
     { key: 'setup', label: 'Profile', icon: '👤' },
     { key: 'checklist', label: 'Documents', icon: '📋' },
+    { key: 'import', label: 'Import', icon: '📥' },
     { key: 'calculator', label: 'Calculator', icon: '🧮' },
   ];
 
@@ -105,6 +107,9 @@ function App() {
             </button>
           </div>
         )}
+
+        {/* Import Hub */}
+        {view === 'import' && <ImportHub />}
 
         {/* Calculator */}
         {view === 'calculator' && (
