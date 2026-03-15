@@ -70,3 +70,9 @@ sandbox/*
 scratch/*
 !scratch/.gitkeep
 .cache/
+
+# Sensitive data exports (OCR, photo exports, bank statement extracts)
+/tmp/photo_exports/
+/tmp/ocr_results/
+*.tax-export
+bank-statements/
